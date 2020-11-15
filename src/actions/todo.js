@@ -4,10 +4,14 @@ import {
   DELETE_ALL_TODOS,
 } from "./../constants/actionTypes";
 
+let nextTodoId = 0;
 export const addTodo = (title) => {
   return {
     type: ADD_TODO,
-    payload: title,
+    payload: {
+      title,
+      id: nextTodoId++,
+    },
   };
 };
 

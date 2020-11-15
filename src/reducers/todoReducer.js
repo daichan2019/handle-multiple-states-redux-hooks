@@ -24,24 +24,17 @@ const initialState = {
 export const todoReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TODO:
-      const length = state.length;
-      const id = length === 0 ? 1 : state[length - 1].id + 1;
-      const todos = { title: action.payload.title, id };
-      return [
+      return {
         ...state,
-        {
-          ...todos,
-        },
-      ];
+        todos: [...state.todos, action.payload],
+      };
     case DELETE_TODO:
       return {
         ...state,
-        todos: [...state.todos.filter((todo) => todo.id !== action.payload)],
+        todos: state.todos.filter((todo) => todo.id !== action.payload),
       };
     case DELETE_ALL_TODOS:
-      return {
-        initialState,
-      };
+      return initialState;
     default:
       return state;
   }
